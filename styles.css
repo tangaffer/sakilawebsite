@@ -1,0 +1,158 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+#topMenu {
+    width: 80%%;
+    text-align: center;
+    margin: 50px 10% 20px 10%;
+}
+
+#topMenu > a {
+    border-radius: 15px;
+    background-color: #eeb335;
+    color: white;
+    padding: 3vw 6vw;
+    margin: 10px 10px 10px 10px;
+    text-align: center; 
+    text-decoration: none;
+    display: inline-block;
+    box-shadow: 5px 10px;
+    font-size: large;
+}
+
+a.buttonLol {
+    text-decoration: none;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 500;
+}
+
+#buttonLol {
+    border-radius: 15px;
+    background-color: #eeb335;
+    color: white;
+    margin-top: 5px;
+    margin-bottom: 0px;
+    padding: 2vw 4vw;
+    text-align: center; 
+    text-decoration: none;
+    display: inline-block;
+    font-size: large;
+}
+
+a:visited {
+    text-decoration: none;
+    color: blue;
+}
+
+#box {
+    height: 100px;
+    width: 100px;
+    background-color: green;
+}
+
+#mainTitle {
+    font-size: 4vw;
+    font-family: 'Roboto', sans-serif;
+    padding-left: 20px;
+    margin: 0px 0px 2vw 0px;
+    background-color: black;
+    color: white;
+}
+
+#subTitle {
+    font-size: 3vw;
+    font-family: 'Roboto', sans-serif;
+    padding-left: 20px;
+    margin: 0px 0px 2vw 0px;
+    background-color: black;
+    color: white;
+}
+
+#data {
+    display: inline;
+    font-size: 20px;
+    font-family: 'Roboto', sans-serif;
+    padding-left: 3vw;
+}
+
+p#data {
+    padding-left: 1vw;
+}
+
+h3 {
+    color: white;
+    padding: 1vw 3vw;
+    font-size: 1.5vw;
+    font-family: 'Roboto', sans-serif;
+}
+
+#insertForm {
+    background-color: #1f5de2;
+}
+
+#updateForm {
+    background-color: #0eb839;
+}
+
+#deleteForm {
+    background-color: #f44336;
+}
+
+form {
+    padding: 0vw 2vw 0vw 2vw;
+}
+
+form > label {
+    font-weight: 500;
+    font-family: 'Roboto', sans-serif;
+}
+
+form > input {
+    font-family: 'Roboto', sans-serif;
+    font-size: medium;
+    width: 500px;
+    height: 50px;
+    margin: 10px;
+}
+
+input[name="Insert"] {
+    font-family: 'Roboto', sans-serif;
+    color: white;
+    border-radius: 10px;
+    font-size: medium;
+    background: #1f5de2;
+} 
+
+input[name="Delete"] {
+    font-family: 'Roboto', sans-serif;
+    color: white;
+    border-radius: 10px;
+    font-size: medium;
+    background: #f44336;
+} 
+
+input[name="Update"] {
+    font-family: 'Roboto', sans-serif;
+    color: white;
+    border-radius: 10px;
+    font-size: medium;
+    background: #0eb839;
+} 
+
+#wrapper {
+    display: flex;
+}
+
+#tableDiv {
+    background-color: lightgoldenrodyellow;
+    flex: 0 0 65%;
+}
+
+#crudDiv {
+    flex: 1;
+}
