@@ -12,7 +12,7 @@
         </div>
 
         <div class="container">
-        <h1 class="col-sm-12">Address</h1>
+        <h1 class="col-sm-12">Addresses</h1>
         
         
         <table class="table">

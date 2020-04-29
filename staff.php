@@ -12,12 +12,65 @@
         </div>
 
         <div class="container">
+        
+        <!-- First container -->
+        <div class="col-sm-7">
+        <h1 class="col-sm-12">Staff</h1>
 
-        <div style="background-color:#eeeeee; border-radius:20px" class="col-sm-6">
+        <table class="table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Staff ID</th>
+            </tr>
+        </thead>
+        <tbody>
 
+        <?php 
+        $servername = "127.0.0.1";
+        $username = "custom";
+        $password = "password";
+        $dbname = "sakila";
+        
+        // Create connection
+        $conn = new mysqli($servername, $username, $password, $dbname);
+        // Check connection
+        if ($conn->connect_error) {
+            die("Connection failed: " . $conn->connect_error);
+        } 
+        
+        $sql = "SELECT * FROM staff";
+        $result = $conn->query($sql);
+        $latestID = 0;
+
+        if ($result->num_rows > 0) {
+            // output data of each row
+            while($row = $result->fetch_assoc()) {
+                $latestID = $row["staff_id"];
+                echo "<tr><td>" . $row["first_name"]. " " . $row["last_name"]. "</td><td>" . $row["staff_id"] . "</td></tr>";
+            }
+        } else {
+            echo "0 results";
+        }
+        $latestID = $latestID + 1;
+
+        $conn->close();
+        ?>
+
+        </tbody>
+        </table>
+        </div>
+
+        <div class="col-sm-1">
+        </div>
+
+        <!-- CRUD div  -->
+        <div style="background-color:#eeeeee; border-radius:20px;margin-bottom:30px; box-shadow:10px 10px #a1a1a1" class="col-sm-4">
+
+        <span class="col-sm-12" style="height:7px;background-color:green"></span>
         <div class="col-sm-12">
-        <h2 class="col-sm-6">Insert New Staff</h2>
-        <span class="col-sm-6" style="height:7px;background-color:green"></span>
+        <h2 class="col-sm-12">Insert New Staff</h2>
+        
         </div>
 
         <br>
@@ -38,10 +91,6 @@
         <br>
 
         <?php
-        $servername = "127.0.0.1";
-        $username = "custom";
-        $password = "password";
-        $dbname = "sakila";
 
         $conn = new mysqli($servername, $username, $password, $dbname);
         // Check connection
@@ -77,9 +126,10 @@
         $conn->close();
         ?>
 
+        <span class="col-sm-12" style="height:7px;background-color:cornflowerblue"></span>
         <div class="col-sm-12">
-        <h2 class="col-sm-6">Update Staff</h2>
-        <span class="col-sm-6" style="height:7px;background-color:cornflowerblue"></span>
+        <h2 class="col-sm-12">Update Staff</h2>
+        
         </div>
 
         <br>
@@ -133,9 +183,10 @@
         $conn->close();
         ?>
 
+        <span class="col-sm-12" style="height:7px;background-color:red"></span>
         <div class="col-sm-12">
-        <h2 class="col-sm-6">Delete Staff</h2>
-        <span class="col-sm-6" style="height:7px;background-color:red"></span>
+        <h2 class="col-sm-12">Delete Staff</h2>
+        
         </div>
 
         <form method="POST">
@@ -177,45 +228,6 @@
         ?>
 
         <br>
-        </div>
-
-        <div class="col-sm-6">
-        <h1 class="col-sm-12">Staff</h1>
-
-        <table class="table">
-        <thead>
-            <tr>
-                <th>Name</th>
-                <th>Staff ID</th>
-            </tr>
-        </thead>
-        <tbody>
-        <?php 
-        
-        // Create connection
-        $conn = new mysqli($servername, $username, $password, $dbname);
-        // Check connection
-        if ($conn->connect_error) {
-            die("Connection failed: " . $conn->connect_error);
-        } 
-        
-        $sql = "SELECT * FROM staff";
-        $result = $conn->query($sql);
-        $latestID = 0;
-
-        if ($result->num_rows > 0) {
-            // output data of each row
-            while($row = $result->fetch_assoc()) {
-                $latestID = $row["staff_id"];
-                echo "<tr><td>" . $row["first_name"]. " " . $row["last_name"]. "</td><td>" . $row["staff_id"] . "</td></tr>";
-            }
-        } else {
-            echo "0 results";
-        }
-        $latestID = $latestID + 1;
-
-        $conn->close();
-        ?>
         </div>
 
         <!-- End of container div -->

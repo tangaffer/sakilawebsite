@@ -36,7 +36,7 @@
             die("Connection failed: " . $conn->connect_error);
         } 
         
-        $sql = "SELECT * FROM country LIMIT 10";
+        $sql = "SELECT * FROM country";
         $result = $conn->query($sql);
         $counter = 1;
 
