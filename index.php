@@ -11,7 +11,7 @@
     </div>
 
     <div class="container">
-    <div class="row">
+    <div class="row" style="margin-bottom:30px">
         <div class="col-sm-4">
         <h3><a href="actor.php" class="button">Actors</a></h3>
         <p>Movie Actors</p>

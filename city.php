@@ -18,16 +18,39 @@
         <table class="table">
         <thead>
             <tr>
-                <th>Index</th>
+                <th>ID</th>
                 <th>City</th>
+                <th>Country</th>
             </tr>
         </thead>
         <tbody>
-        <?php 
+        <!-- Pagination Code -->
+        <?php
         $servername = "127.0.0.1";
         $username = "custom";
         $password = "password";
         $dbname = "sakila";
+
+        // Create connection
+        $conn = new mysqli($servername, $username, $password, $dbname);
+        // Check connection
+        if ($conn->connect_error) {
+            die("Connection failed: " . $conn->connect_error);
+        } 
+
+        if (isset($_GET['pageno'])) {
+            $pageno = $_GET['pageno'];
+        } else {
+            $pageno = 1;
+        }
+
+        $no_of_records_per_page = 20;
+        $offset = ($pageno-1) * $no_of_records_per_page;
+
+        $total_pages = 30;
+
+        ?>
+        <?php 
         
         // Create connection
         $conn = new mysqli($servername, $username, $password, $dbname);
@@ -36,16 +59,16 @@
             die("Connection failed: " . $conn->connect_error);
         } 
         
-        $sql = "SELECT city, country
+        $sql = "SELECT city_id, city, country
                 FROM city
                 INNER JOIN country ON city.country_id = country.country_id
-                LIMIT 10";
+                LIMIT $offset, $no_of_records_per_page";
         $result = $conn->query($sql);
         
         if ($result->num_rows > 0) {
             // output data of each row
             while($row = $result->fetch_assoc()) {
-                echo "<tr><td>" . $row["city"] . "</td><td>" . $row["country"]. "</td></tr>";
+                echo "<tr><td>" . $row["city_id"]. "</td><td>" .$row["city"] . "</td><td>" . $row["country"]. "</td></tr>";
             }
         } else {
             echo "0 results";
@@ -54,6 +77,16 @@
         ?>
         </tbody>
         </table>
+        <ul class="pagination">
+            <li class="page-item"><a href="?pageno=1">First</a></li>
+            <li class="<?php if($pageno <= 1){ echo 'disabled'; } ?> page-item">
+            <a href="<?php if($pageno <= 1){ echo '#'; } else { echo "?pageno=".($pageno - 1); } ?>">Prev</a>
+            </li>
+            <li class="<?php if($pageno >= $total_pages){ echo 'disabled'; } ?> page-item">
+            <a href="<?php if($pageno >= $total_pages){ echo '#'; } else { echo "?pageno=".($pageno + 1); } ?>">Next</a>
+            </li>
+            <li class="page-item"><a href="?pageno=<?php echo $total_pages; ?>">Last</a></li>
+        </ul>
         </div>
     </body>
 </html>

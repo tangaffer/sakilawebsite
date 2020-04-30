@@ -27,11 +27,36 @@
             </tr>
         </thead>
         <tbody>
-        <?php 
+        <!-- Pagination Code -->
+        <?php
         $servername = "127.0.0.1";
         $username = "custom";
         $password = "password";
         $dbname = "sakila";
+
+        // Create connection
+        $conn = new mysqli($servername, $username, $password, $dbname);
+        // Check connection
+        if ($conn->connect_error) {
+            die("Connection failed: " . $conn->connect_error);
+        } 
+
+        if (isset($_GET['pageno'])) {
+            $pageno = $_GET['pageno'];
+        } else {
+            $pageno = 1;
+        }
+
+        $no_of_records_per_page = 25;
+        $offset = ($pageno-1) * $no_of_records_per_page;
+
+        $total_pages_sql = "SELECT COUNT(*) FROM customer";
+        $result = mysqli_query($conn, $total_pages_sql);
+        $total_rows = mysqli_fetch_array($result)[0];
+        $total_pages = ceil($total_rows / $no_of_records_per_page);
+
+        ?>
+        <?php 
         
         // Create connection
         $conn = new mysqli($servername, $username, $password, $dbname);
@@ -40,7 +65,7 @@
             die("Connection failed: " . $conn->connect_error);
         } 
         
-        $sql = "SELECT * FROM customer";
+        $sql = "SELECT * FROM customer LIMIT $offset, $no_of_records_per_page";
         $result = $conn->query($sql);
         
         if ($result->num_rows > 0) {
@@ -55,13 +80,23 @@
         ?>
         </tbody>
         </table>
+        <ul class="pagination">
+            <li class="page-item"><a href="?pageno=1">First</a></li>
+            <li class="<?php if($pageno <= 1){ echo 'disabled'; } ?> page-item">
+            <a href="<?php if($pageno <= 1){ echo '#'; } else { echo "?pageno=".($pageno - 1); } ?>">Prev</a>
+            </li>
+            <li class="<?php if($pageno >= $total_pages){ echo 'disabled'; } ?> page-item">
+            <a href="<?php if($pageno >= $total_pages){ echo '#'; } else { echo "?pageno=".($pageno + 1); } ?>">Next</a>
+            </li>
+            <li class="page-item"><a href="?pageno=<?php echo $total_pages; ?>">Last</a></li>
+        </ul>
         </div>
 
         <div class="col-sm-1">
         </div>
 
         <!-- CRUD forms -->
-        <div style="background-color:#eeeeee; border-radius:20px;margin-bottom:30px; box-shadow:10px 10px #a1a1a1" class="col-sm-4">
+        <div style="background-color:#eeeeee; border-radius:20px;margin-bottom:150px; box-shadow:10px 10px #a1a1a1" class="col-sm-4">
 
         <span class="col-sm-12" style="height:7px;background-color:green"></span>
         <div class="col-sm-12">
